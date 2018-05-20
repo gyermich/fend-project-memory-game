@@ -25,7 +25,6 @@ for (const card of shuffledCards) {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -33,7 +32,6 @@ function shuffle(array) {
         currentIndex -= 1;
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
-        console.log(array, array[currentIndex]);
         array[randomIndex] = temporaryValue;
     }
 

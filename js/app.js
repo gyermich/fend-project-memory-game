@@ -4,6 +4,7 @@
 
 // get a NodeList of cards and convert it to an array to be able to shuffle
 let cards = [...document.querySelectorAll("li.card")];
+let openCards = [];
 
 /*
  * Display the cards on the page
@@ -49,3 +50,58 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+function displayCardSymbol(card) {
+    card.classList.add("open", "show");
+}
+
+
+function addToOpenCards(card) {
+    openCards.push(card);
+}
+
+function lockOpenCards() {
+    for (let card of openCards) {
+        card.classList.add("match");
+    };
+}
+function hideOpenCards() {
+    for (let card of openCards) {
+        card.classList.remove("open", "show", "no-match");
+    };
+}
+
+function clearOpenCards() {
+    openCards = [];
+}
+
+function checkMatch() {
+    const [card1, card2] = openCards;
+    if (card1.firstElementChild.classList[1] !== card2.firstElementChild.classList[1]) {
+        card1.classList.add("no-match");
+        card2.classList.add("no-match");
+        return false;
+    } else {
+        return true;
+    }
+}
+
+deck.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    if (event.target.nodeName === "LI") {
+        let card = event.target;
+
+        displayCardSymbol(card);
+        addToOpenCards(card);
+
+        if (openCards.length == 2) {
+            if (checkMatch()) {
+                window.setTimeout(lockOpenCards(), 1000);
+            } else {
+                window.setTimeout(hideOpenCards, 1000);
+            }
+            window.setTimeout(clearOpenCards, 1000);
+        }
+
+    }
+});

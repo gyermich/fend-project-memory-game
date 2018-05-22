@@ -2,11 +2,11 @@
  * Create a list that holds all of your cards
  */
 
-// get a NodeList of cards and convert it to an array to be able to shuffle
-let cards = [...document.querySelectorAll("li.card")];
 let openCards = [];
 let moves = 0;
 let deck = document.querySelector(".deck");
+// get a NodeList of cards and convert it to an array to be able to shuffle
+let cards = [...document.querySelectorAll("li.card")];
 
 /*
  * Display the cards on the page
@@ -40,7 +40,6 @@ function shuffle(array) {
 
     return array;
 }
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -110,6 +109,36 @@ function updateMovesCount() {
     document.querySelector(".moves").textContent = moves;
 }
 
+function deductOneStar(star) {
+    star.firstElementChild.classList.remove("fa-star");
+    star.firstElementChild.classList.add("fa-star-o");
+}
+
+function resetStars(stars) {
+    for (let star of stars) {
+        star.firstElementChild.classList.remove("fa-star-o");
+        star.firstElementChild.classList.add("fa-star");
+    };
+}
+
+function updateStarRating() {
+    let stars = document.querySelector(".stars").children;
+
+    if (moves === 0 ) {
+        // reset stars
+        resetStars(stars);
+    } else if (moves > 15 && moves <= 30) {
+        // deduct one star from rating
+        deductOneStar(stars[2]);
+    } else if (moves > 30 && moves <= 50) {
+        // deduct second star
+        deductOneStar(stars[1]);
+    } else if (moves > 50) {
+        // deduct third star
+        deductOneStar(stars[0]);
+    }
+}
+
 shuffleDeck();
 
 deck.addEventListener('click', function(event) {
@@ -132,7 +161,8 @@ deck.addEventListener('click', function(event) {
             }
             moves++
             updateMovesCount();
-            // when done checking if it's a match clear list of open cards
+            updateStarRating();
+            // clear list of open cards
             window.setTimeout(clearOpenCards, 1000);
         };
         if (deck.querySelectorAll(".match").length === 16) {
@@ -145,6 +175,9 @@ document.querySelector(".restart").addEventListener("click", function(event){
     // reset moves
     moves = 0;
     updateMovesCount();
+    updateStarRating();
     resetCards();
     shuffleDeck();
 })
+
+

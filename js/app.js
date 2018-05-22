@@ -75,7 +75,7 @@ function hideOpenCards() {
 
 function resetCards() {
     for (let card of cards) {
-        card.classList.remove("open", "show", "no-match", "match");
+        card.classList.remove("open", "show", "no-match", "match", "zoom");
     };
 }
 

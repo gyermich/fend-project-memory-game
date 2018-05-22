@@ -96,10 +96,19 @@ h1 {
 }
 
 .deck .card.no-match {
-    /* Start the shake animation and make the animation last for 0.5 seconds */
-        animation: shake 0.5s;
-        /* When the animation is finished, start again */
-        animation-iteration-count: 3;
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes zoom {
+    0% { transform: scale(0.9); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1.0); }
+}
+
+.deck .card.zoom {
+    animation: zoom 0.3s;
+    animation-iteration-count: 1;
 }
 
 /*
@@ -127,4 +136,28 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+/*
+ * Results Popup
+ */
+
+#overlay {
+     visibility: visible;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+}
+
+#overlay div {
+     width:300px;
+     margin: 100px auto;
+     background-color: #fff;
+     border:1px solid #000;
+     padding:15px;
+     text-align:center;
 }

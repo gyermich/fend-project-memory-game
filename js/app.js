@@ -7,6 +7,8 @@ let moves = 0;
 let deck = document.querySelector(".deck");
 // get a NodeList of cards and convert it to an array to be able to shuffle
 let cards = [...document.querySelectorAll("li.card")];
+let elapsedTime = 0;
+let playing = false;
 
 /*
  * Display the cards on the page
@@ -145,6 +147,7 @@ deck.addEventListener('click', function(event) {
     event.preventDefault();
     // check if the clicked element is li
     if (event.target.nodeName === "LI") {
+        playing = true;
         let card = event.target;
 
         displayCardSymbol(card);
@@ -165,19 +168,50 @@ deck.addEventListener('click', function(event) {
             // clear list of open cards
             window.setTimeout(clearOpenCards, 1000);
         };
+        if (moves === 50) {
+            playing = false;
+            gameover;
+        }
         if (deck.querySelectorAll(".match").length === 16) {
+            playing = false;
             alert("YES!");
         }
     }
 });
 
+/*
+ * Reset Button
+ */
+
 document.querySelector(".restart").addEventListener("click", function(event){
-    // reset moves
+    playing = false;
     moves = 0;
     updateMovesCount();
     updateStarRating();
     resetCards();
     shuffleDeck();
+    document.querySelector(".timer").textContent = "Time: 00:00";
 })
 
+/*
+ * Timer
+ */
 
+function padTimeDisplay(value) {
+    let padding = "00";
+    // pad the minutes/seconds display with 0, e.g. if value is '1', return '01'
+    return padding.substring(value.toString().length) + value;
+}
+
+let timer = setInterval(function() {
+    if (playing === true) {
+
+        elapsedTime++;
+        let minutes = Math.floor(elapsedTime / 60);
+        let seconds = elapsedTime - minutes * 60;
+
+        let minutes_display = padTimeDisplay(minutes);
+        let seconds_display = padTimeDisplay(seconds);
+        document.querySelector(".timer").textContent = `Time: ${minutes_display}:${seconds_display}`;
+    }
+}, 1000);

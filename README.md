@@ -1,5 +1,7 @@
 # Memory Game Project
 
+The game is published at https://gyermich.github.io/fend-project-memory-game/
+
 ## Table of Contents
 
 * [Instructions](#instructions)

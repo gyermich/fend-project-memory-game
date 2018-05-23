@@ -53,10 +53,10 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
 function displayCardSymbol(card) {
     card.classList.add("open", "show");
 }
-
 
 function addToOpenCards(card) {
     openCards.push(card);
@@ -141,6 +141,19 @@ function updateStarRating() {
     }
 }
 
+function showModalWithStats(header) {
+    starStats = document.querySelector(".stars").innerHTML;
+    moveStats = document.querySelector(".moves").textContent;
+    timeStats = document.querySelector(".timer").textContent;
+
+    document.querySelector('.modal-stars').innerHTML = starStats;
+    document.querySelector('.modal-moves').textContent = moveStats;
+    document.querySelector('.modal-time').textContent = timeStats;
+    document.querySelector('.modal-header').textContent = header;
+
+    document.querySelector('.modal').style.display = "block";
+}
+
 shuffleDeck();
 
 deck.addEventListener('click', function(event) {
@@ -160,30 +173,28 @@ deck.addEventListener('click', function(event) {
                 lockOpenCards();
             } else {
                 // otherwise hide the cards
-                window.setTimeout(hideOpenCards, 1000);
+                window.setTimeout(hideOpenCards, 800);
             }
             moves++
             updateMovesCount();
             updateStarRating();
             // clear list of open cards
-            window.setTimeout(clearOpenCards, 1000);
+            window.setTimeout(clearOpenCards, 800);
         };
+        // game over at 50 moves
         if (moves === 50) {
             playing = false;
-            gameover;
-        }
+            showModalWithStats('Game Over');
+        };
+        // all cards are matched - game won
         if (deck.querySelectorAll(".match").length === 16) {
             playing = false;
-            alert("YES!");
-        }
+            showModalWithStats('You Won!');
+        };
     }
 });
 
-/*
- * Reset Button
- */
-
-document.querySelector(".restart").addEventListener("click", function(event){
+function resetGame(){
     playing = false;
     moves = 0;
     updateMovesCount();
@@ -191,7 +202,20 @@ document.querySelector(".restart").addEventListener("click", function(event){
     resetCards();
     shuffleDeck();
     document.querySelector(".timer").textContent = "Time: 00:00";
-})
+    document.querySelector('.modal').style.display = "none";
+}
+
+/*
+ * Reset Button
+ */
+
+document.querySelector(".restart").addEventListener("click", resetGame)
+
+/*
+ * Modal Reset Button
+ */
+
+document.querySelector(".modal-restart").addEventListener("click", resetGame)
 
 /*
  * Timer

@@ -142,3 +142,34 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    background-color: #fefefe;
+    opacity: 0.6;
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+    font-size: 1.6em;
+}
+
+h1.modal-header {
+    text-align: center;
+}
+
+.modal-content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.modal-content ul.modal-stars {
+    padding-left: 0px;
+}
+
+.modal-content .modal-stars li {
+    list-style: none;
+    display: inline-block;
+}

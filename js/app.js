@@ -59,7 +59,10 @@ function displayCardSymbol(card) {
 }
 
 function addToOpenCards(card) {
-    openCards.push(card);
+    // only add a card if openCards doesn't already have it
+    if (!openCards.includes(card)) {
+        openCards.push(card);
+    }
 }
 
 function lockOpenCards() {
@@ -126,18 +129,15 @@ function resetStars(stars) {
 function updateStarRating() {
     let stars = document.querySelector(".stars").children;
 
-    if (moves === 0 ) {
-        // reset stars
-        resetStars(stars);
-    } else if (moves > 15 && moves <= 30) {
+    if (moves > 15 && moves <= 30) {
         // deduct one star from rating
         deductOneStar(stars[2]);
-    } else if (moves > 30 && moves <= 50) {
+    } else if (moves > 30) {
         // deduct second star
         deductOneStar(stars[1]);
-    } else if (moves > 50) {
-        // deduct third star
-        deductOneStar(stars[0]);
+    } else {
+        // all three stars are displayed
+        resetStars(stars);
     }
 }
 
@@ -167,7 +167,7 @@ deck.addEventListener('click', function(event) {
         addToOpenCards(card);
 
         // check if there are 2 open cards
-        if (openCards.length == 2) {
+        if (openCards.length === 2) {
             if (isMatch()) {
                 // if it's a match lock them open
                 lockOpenCards();

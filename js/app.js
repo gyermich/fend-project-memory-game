@@ -179,6 +179,7 @@ deck.addEventListener('click', function(event) {
 function resetGame() {
     playing = false;
     moves = 0;
+    elapsedTime = 0;
     updateMovesCount();
     updateStarRating();
     resetCards();

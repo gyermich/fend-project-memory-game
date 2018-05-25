@@ -1,22 +1,22 @@
 # Memory Game Project
 
+Memory Game is developed as part of the Grow With Google Front-End Nanodegree Scholarship sponsored by Google and offered through Udacity.
 The game is published at https://gyermich.github.io/fend-project-memory-game/
 
-## Table of Contents
+## Game Instructions
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+The player must match all the cards to win the game. The cards are shuffled, and only 2 can be viewed at a time. If the cards match they will remain open.
 
-## Instructions
+At the end of the game the player is able to view the amount of moves it took, rating and the time elapsed.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The game can be restarted at any time.
 
-To get started, open `js/app.js` and start building out the app's functionality
+## Built With
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+* [Bootstrap](https://getbootstrap.com/)
+* [FontAwesome](https://fontawesome.com/)
+* [Google Fonts Coda](https://fonts.google.com/specimen/Coda)
 
 ## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

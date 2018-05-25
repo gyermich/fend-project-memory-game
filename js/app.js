@@ -143,8 +143,12 @@ deck.addEventListener('click', function(event) {
         playing = true;
         let card = event.target;
 
-        displayCardSymbol(card);
-        addToOpenCards(card);
+        // only open the card if there are
+        // less than two open cards
+        if (openCards.length < 2) {
+            displayCardSymbol(card);
+            addToOpenCards(card);
+        }
 
         // check if there are 2 open cards
         if (openCards.length === 2) {
